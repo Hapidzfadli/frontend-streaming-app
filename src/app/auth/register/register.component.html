@@ -1,0 +1,111 @@
+<div class="max-h-screen grid grid-cols-1 lg:grid-cols-2 gap-4 text-white p-8 shadow-sm">
+    <div class="grid grid-cols-4 gap-2 p-4  rounded-lg shadow-app" >
+        @for (tile of tiles; track $index; let i = $index)
+            {
+            <div class="w-[100px] h-[100px] md:w-[150px] md:h-[150px] bg-[url('/assets/bg-grid.png')] bg-cover rounded-lg flex justify-center items-center transition-all duration-500 ease-in-out">
+              
+              @if (i === 3) {
+                <div class="backdrop-blur-md bg-gradient-to-br from-indigo-500/20 to-purple-700/30 border border-white/30 rounded-xl shadow-md text-white w-[95%] h-[95%] p-3 text-sm flex flex-col justify-center items-center text-center space-y-1 overflow-hidden">
+                  <div class="text-xl">🔥</div>
+                  <p class="text-base font-semibold">Trending Now</p>
+                  <p class="text-xs">Discover what everyone's watching today.</p>
+                </div>
+              }
+          
+              @if (i === halfLength - 1) {
+                <div class="backdrop-blur-md bg-gradient-to-br from-blue-500/20 to-sky-700/30 border border-white/30 rounded-xl shadow-md text-white w-[95%] h-[95%] p-3 text-sm flex flex-col justify-center items-center text-center space-y-1 overflow-hidden">
+                  <div class="text-xl">🎬</div>
+                  <p class="text-base font-semibold">HD Streaming</p>
+                  <p class="text-xs">No lags, just pure entertainment.</p>
+                </div>
+              }
+          
+              @if (i === halfLength) {
+                <div class="backdrop-blur-md bg-gradient-to-br from-purple-500/20 to-pink-500/30 border border-white/30 rounded-xl shadow-md text-white w-[95%] h-[95%] p-3 text-sm flex flex-col justify-center items-center text-center space-y-1 overflow-hidden">
+                  <div class="text-xl">💸</div>
+                  <p class="text-base font-semibold">Earn from Videos</p>
+                  <p class="text-xs">Upload your videos and start earning.</p>
+                </div>
+              }
+          
+              @if (i === halfLength + 1) {
+                <div class="backdrop-blur-md bg-gradient-to-br from-green-500/20 to-emerald-700/30 border border-white/30 rounded-xl shadow-md text-white w-[95%] h-[95%] p-3 text-sm flex flex-col justify-center items-center text-center space-y-1 overflow-hidden">
+                  <div class="text-xl">📱</div>
+                  <p class="text-base font-semibold">Cross-device</p>
+                  <p class="text-xs">Smartphones, tablets, smart TVs — all supported.</p>
+                </div>
+              }
+          
+              @if (i === 9) {
+                <div class="backdrop-blur-md bg-gradient-to-br from-yellow-500/20 to-orange-600/30 border border-white/30 rounded-xl shadow-md text-white w-[95%] h-[95%] p-3 text-sm flex flex-col justify-center items-center text-center space-y-1 overflow-hidden">
+                  <div class="text-xl">🎞️</div>
+                  <p class="text-base font-semibold">Latest Releases</p>
+                  <p class="text-xs">New blockbusters and shows weekly.</p>
+                </div>
+              }
+          
+            </div>
+          }
+          
+    </div>
+      
+    <div class="flex items-center justify-center bg-black text-white px-6 py-12 rounded-lg">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-full max-w-md space-y-6 box-border">
+            <div>
+              <h1 class="text-3xl font-bold mb-2">Sign Up</h1>
+              <p class="text-sm text-gray-400">Join HFlix and Start Streaming Movie Today</p>
+            </div>
+          
+           <div>
+                <input id="fullname" type="text" formControlName="fullname" placeholder="Full Name"
+                class="w-full px-4 py-3 rounded-lg bg-gray-900 border border-gray-700 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500" />
+
+                <div *ngIf="submitted && registerForm.controls['fullname'].invalid" class="text-red-400 text-sm mt-1">
+                    Full name is required.
+                </div>
+           </div>
+          
+            <div>
+                <input type="text" formControlName="username" placeholder="Username"
+                class="w-full px-4 py-3 rounded-lg bg-gray-900 border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" />
+
+                <div *ngIf="submitted && registerForm.controls['username'].invalid" class="text-red-400 text-sm mt-1">
+                    Username is required.
+                </div>
+            </div>
+          
+            <div>
+                <input type="email" formControlName="email" placeholder="email@mail.com"
+              class="w-full px-4 py-3 rounded-lg bg-gray-900 border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" />
+                <div *ngIf="submitted && registerForm.controls['email'].errors && submitted" class="text-red-400 text-sm mt-1">
+                    <div *ngIf="registerForm.controls['email'].errors['required']">Email is required.</div>
+                    <div *ngIf="registerForm.controls['email'].errors['email']">Email format is invalid.</div>
+                </div>
+            </div>
+          
+            <div>
+                <input type="password" formControlName="password" placeholder="password"
+                class="w-full px-4 py-3 rounded-lg bg-gray-900 border-gray-700 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" />
+                <div *ngIf="submitted && registerForm.controls['password'].errors" class="text-red-400 text-sm mt-1">
+                    <div *ngIf="registerForm.controls['password'].errors['required']">Password is required.</div>
+                    <div *ngIf="registerForm.controls['password'].errors['minlength']">Password must be at least 8 characters.</div>
+                </div>
+            </div>
+            
+            <button
+                type="submit"
+                [disabled]="registerForm.invalid || loading"
+                class="w-full cursor-oi px-4 py-3 rounded-lg flex justify-center border-0 text-lg text-white
+                        bg-sky-500 hover:bg-sky-700 disabled:bg-gray-700 disabled:cursor-not-allowed"
+                >
+                <ng-container *ngIf="!loading; else loadingTpl">Create account</ng-container>
+                <ng-template #loadingTpl>
+                    <span class="animate-pulse">⏳ Processing...</span>
+                </ng-template>
+            </button>
+
+          </form>
+          <p-toast></p-toast>
+
+    </div>
+</div>

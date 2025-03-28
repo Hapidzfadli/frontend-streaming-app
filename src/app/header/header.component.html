@@ -1,0 +1,29 @@
+<header class="sticky top-0 z-50 bg-white/5 backdrop-blur-md shadow-lg ">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        
+        <!-- LOGO -->
+        <div class="flex items-center">
+          <img src="assets/logo.png" alt="Logo" class="h-8 w-auto" />
+        </div>
+  
+        <!-- MENU TENGAH (Hidden on small screens) -->
+        <div class="hidden md:flex md:space-x-4">
+          <p-menubar [model]="items" class="border-none shadow-none"></p-menubar>
+        </div>
+  
+        <!-- AVATAR PROFILE KANAN -->
+        <div class="flex items-center space-x-2">
+          <p-menu #menu [popup]="true" [model]="profileItems"></p-menu>
+          <p (click)="menu.toggle($event)" class="cursor-pointer bg-cyan-950/50 hover:bg-cyan-900/50 px-3 py-2 rounded-lg text-white text-sm hidden sm:inline-block">
+            Login / Register
+          </p>
+          <button pButton pRipple class="p-button-text" (click)="menu.toggle($event)">
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png" shape="circle" />
+          </button>
+        </div>
+  
+      </div>
+    </div>
+  </header>
+  
